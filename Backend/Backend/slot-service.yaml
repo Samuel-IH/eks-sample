@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: Title
+  description: Title
+  version: 1.0.0
+servers:
+  - url: 'https://localhost:8080'
+paths:
+  /spin:
+    post:
+      tags:
+        - slot
+      summary: Spin the slot machine
+      description: ''
+      operationId: spin
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpinResult'
+components:
+  schemas:
+    SpinResult:
+      title: Spin Result
+      description: The three spin results from a spin
+      type: object
+      properties:
+        spin1:
+          $ref: '#/components/schemas/SpinEnum'
+        spin2:
+          $ref: '#/components/schemas/SpinEnum'
+        spin3:
+          $ref: '#/components/schemas/SpinEnum'
+    SpinEnum:
+      type: string
+      enum:
+        - GRAPEFRUIT
+        - LEMON
+        - LIME
+        - ORANGE

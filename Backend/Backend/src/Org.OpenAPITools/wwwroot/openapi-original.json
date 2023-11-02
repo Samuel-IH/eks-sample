@@ -1,0 +1,62 @@
+{
+  "openapi" : "3.0.3",
+  "info" : {
+    "description" : "Title",
+    "title" : "Title",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://localhost:8080"
+  } ],
+  "paths" : {
+    "/spin" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "spin",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SpinResult"
+                }
+              }
+            },
+            "description" : "successful operation"
+          }
+        },
+        "summary" : "Spin the slot machine",
+        "tags" : [ "slot" ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "SpinResult" : {
+        "description" : "The three spin results from a spin",
+        "example" : {
+          "spin1" : null,
+          "spin3" : null,
+          "spin2" : null
+        },
+        "properties" : {
+          "spin1" : {
+            "$ref" : "#/components/schemas/SpinEnum"
+          },
+          "spin2" : {
+            "$ref" : "#/components/schemas/SpinEnum"
+          },
+          "spin3" : {
+            "$ref" : "#/components/schemas/SpinEnum"
+          }
+        },
+        "title" : "Spin Result",
+        "type" : "object"
+      },
+      "SpinEnum" : {
+        "enum" : [ "GRAPEFRUIT", "LEMON", "LIME", "ORANGE" ],
+        "type" : "string"
+      }
+    }
+  }
+}
