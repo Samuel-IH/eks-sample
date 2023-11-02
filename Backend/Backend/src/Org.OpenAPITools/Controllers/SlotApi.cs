@@ -38,6 +38,10 @@ namespace Org.OpenAPITools.Controllers
         [ProducesResponseType(statusCode: 200, type: typeof(SpinResult))]
         public virtual IActionResult Spin()
         {
+            // Utilize as much CPU as we can for the next 5 seconds (for testing)
+            var start = DateTime.Now;
+            while ((DateTime.Now - start).TotalSeconds < 5) { }
+            
             return new ObjectResult(new SpinResult
             {
                 Spin1 = (SpinEnum)Random.Shared.Next(1, SpinEnumValuesLength),
