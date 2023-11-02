@@ -1,7 +1,4 @@
 # commands are split in case of future customization on a per-target basis
 
 # Unity
-docker run -v "$(pwd):/input" algas/quicktype /input/Schema/types.json -o /input/SlotMachine/Assets/Scripts/Schema/Types.cs --lang csharp --namespace Schema
-
-# SlotService (.NET)
-docker run -v "$(pwd):/input" algas/quicktype /input/Schema/types.json -o /input/SlotService/SlotService/Schema/Types.cs --lang csharp --namespace Schema
+docker run --rm -v "$(PWD):/local" openapitools/openapi-generator-cli generate -i /local/Schema/slot-service.yaml -g csharp -o /local/SlotMachine/Assets/Scripts/Schema --additional-properties=library=unityWebRequest
