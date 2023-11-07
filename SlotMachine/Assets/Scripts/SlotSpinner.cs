@@ -63,6 +63,14 @@ public class SlotSpinner : MonoBehaviour
         {
             // do not create a new api instance every time, it's expensive!!
             // This is just for demonstration purposes.
+            if (serverAddressInputField.text != null && serverAddressInputField.text.Length > 0)
+            {
+                if (!serverAddressInputField.text.StartsWith("http://"))
+                {
+                    serverAddressInputField.text = "http://" + serverAddressInputField.text;
+                }
+            }
+            
             var api = new SlotApi(serverAddressInputField.text);
             
             var result = await api.SpinAsync();
