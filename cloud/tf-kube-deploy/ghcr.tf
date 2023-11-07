@@ -4,6 +4,12 @@ variable "ghcrtoken" {
   default = "us-east-1"
 }
 
+variable "ghcruser" {
+  description = "User for the Github Package registry"
+  type = string
+  default = "us-east-1"
+}
+
 resource "kubernetes_secret" "ghcr-registry" {
   metadata {
     name = "ghcrsecret"
@@ -18,8 +24,8 @@ resource "kubernetes_secret" "ghcr-registry" {
 
 
 data "template_file" "docker_config_script" {
-  template = "${file("${path.module}/ghcr-secret.json")}"
+  template = "${file("${path.module}/ghcr-auth-template.json")}"
   vars = {
-    pat = "${var.ghcrtoken}"
+    auth = base64encode("${var.ghcruser}:${var.ghcrtoken}")
   }
 }
