@@ -23,3 +23,5 @@ USER root
 
 COPY post-start.sh /usr/local/bin/post-start
 RUN chmod +x /usr/local/bin/post-start
+
+# wget -c https://github.com/rebuy-de/aws-nuke/releases/download/v2.25.0/aws-nuke-v2.25.0-linux-amd64.tar.gz -O - | tar -xz -C $HOME/bin
