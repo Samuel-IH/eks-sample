@@ -5,6 +5,7 @@ using System.Linq;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
 using Org.OpenAPITools.Model;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -13,10 +14,11 @@ using Random = UnityEngine.Random;
 // One script to rule them all
 public class SlotSpinner : MonoBehaviour
 {
-    public static readonly SlotApi Api = new SlotApi("http://localhost:5038");
-
     [SerializeField]
     private Button spinButton;
+    
+    [SerializeField]
+    private TMP_InputField serverAddressInputField;
 
     [Serializable]
     private class SpinCellMapping
@@ -59,13 +61,18 @@ public class SlotSpinner : MonoBehaviour
     {
         try
         {
-            var result = await Api.SpinAsync();
+            // do not create a new api instance every time, it's expensive!!
+            // This is just for demonstration purposes.
+            var api = new SlotApi(serverAddressInputField.text);
+            
+            var result = await api.SpinAsync();
             Debug.Log(result);
 
             if (result is not SpinResult spinResult) return;
             if (spinResult.Spin1 is not SpinEnum r1) return;
             if (spinResult.Spin2 is not SpinEnum r2) return;
             if (spinResult.Spin3 is not SpinEnum r3) return;
+            if (this == null) return;// we may have been destroyed while we were waiting for the result
             
             StartCoroutine(PerformSpinAnimation(r1, r2, r3));
         } catch (ApiException e)
