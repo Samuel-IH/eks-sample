@@ -41,6 +41,8 @@ This will delete the EKS cluster and all the resources created by terraform.
 ### Frontend
 To run the frontend, simply import the SlotMachine directory into Unity Hub as a project. Unity Hub should automatically detect the project and add it to the list of projects. Select the project and click the "Open" button to open the project in Unity Editor. Once the project is open, click the "Play" button to run the game. You will be presented with a text input at the top, and a button on the bottom. Paste in the endpoint url of your loadbalancer at the top and click the button to "spin" the wheel. The game will then communicate with the backend to perform the spin operation. The result of the spin will be displayed in the middle of the screen.
 
+**Note:** When performing a spin, it may take the server > 10 seconds to respond. This is because the backend intentionally does "heavy" work to simulate a real-world scenario. I intend to add auto-scaling to the backend in the future, and this will help me test the auto-scaling feature.
+
 ## Credits
 
 The slot machine icons used in this project are sourced from [Icons8](https://icons8.com). Here are the mandatory links to the icons used:
