@@ -1,6 +1,3 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 terraform {
 
   required_providers {
@@ -23,7 +20,14 @@ terraform {
       source  = "hashicorp/cloudinit"
       version = "~> 2.3.2"
     }
+
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.16.1"
+    }
   }
+
+  
 
   required_version = "~> 1.3"
 }
